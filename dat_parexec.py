@@ -1,3 +1,4 @@
+import webbrowser
 # me - this DAT
 # par - the Par object that has changed
 # val - the current value
@@ -35,6 +36,11 @@ def onValuesChanged(changes):
 
 def onPulse(par):
     print(par.name)
+    if (par.name == 'Website'):
+        links = ['Website', 'Instagram']
+        urls = ['https://faunaflora.ai', 'https://www.instagram.com/florafaunaai']
+        link = ui.messageBox('More about Flora', "", buttons=links)
+        if link in range(len(urls)): webbrowser.open(urls[link])
     return
 
 def onExpressionChange(par, val, prev):
