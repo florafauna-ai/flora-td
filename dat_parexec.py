@@ -35,12 +35,12 @@ def onValuesChanged(changes):
 	return
 
 def onPulse(par):
-    print(par.name)
-    if (par.name == 'Website'):
-        links = ['Website', 'Instagram']
-        urls = ['https://faunaflora.ai', 'https://www.instagram.com/florafaunaai']
-        link = ui.messageBox('More about Flora', "", buttons=links)
-        if link in range(len(urls)): webbrowser.open(urls[link])
+    if (par.name == 'Site'):
+        webbrowser.open('https://florafauna.ai/app')
+    elif (par.name == 'Help'):
+        webbrowser.open('https://discord.gg/Ccencznk5f')
+    elif (par.name == 'Docs'):
+        webbrowser.open('https://docs.florafauna.ai')
     return
 
 def onExpressionChange(par, val, prev):
