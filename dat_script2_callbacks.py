@@ -8,15 +8,25 @@ import base64
 
 def readb64(encoded_data):
     # Remove the prefix if it exists
-    if encoded_data.startswith('data:image/jpeg;base64,'):
-        encoded_data = encoded_data.split(',')[1]
-    nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    # Convert BGR to RGB
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # Flip the image along both axes
-    img = cv2.flip(img, 0)
-    return img
+	if not encoded_data:
+		raise ValueError("No data provided")
+
+	if encoded_data.startswith('data:image/jpeg;base64,'):
+		encoded_data = encoded_data.split(',')[1]
+
+	try:
+		nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
+		img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+		if img is None:
+			raise ValueError("Image decoding failed")
+		# Convert BGR to RGB
+		img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+		# Flip the image along both axes
+		img = cv2.flip(img, 0)
+    	
+	except Exception as e:
+		raise ValueError(f"Error processing image: {e}")
+	return img
 
 # press 'Setup Parameters' in the OP to call this function to re-create the parameters.
 def onSetupParameters(scriptOp):
