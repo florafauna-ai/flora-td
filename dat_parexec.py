@@ -1,3 +1,4 @@
+import webbrowser
 # me - this DAT
 # par - the Par object that has changed
 # val - the current value
@@ -34,7 +35,12 @@ def onValuesChanged(changes):
 	return
 
 def onPulse(par):
-    print(par.name)
+    if (par.name == 'Site'):
+        webbrowser.open('https://florafauna.ai/app')
+    elif (par.name == 'Help'):
+        webbrowser.open('https://discord.gg/Ccencznk5f')
+    elif (par.name == 'Docs'):
+        webbrowser.open('https://docs.florafauna.ai')
     return
 
 def onExpressionChange(par, val, prev):
