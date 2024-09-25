@@ -3,8 +3,11 @@ import asyncio
 import socket
 from queue import Queue, Empty
 from TDStoreTools import StorageManager
+import datetime
 
 websockets = op('td_pip').ImportModule('websockets')
+version = '0.3.3'
+date = datetime.datetime.now().strftime("%m/%d/%Y")
 
 class floraWebSocketServerExt:
     def __init__(self, ownerComp):
@@ -28,6 +31,8 @@ class floraWebSocketServerExt:
         
         # Load previously stored values
         self.port = self.stored['Port'] if self.stored['Port'] else int(parent.FloraInParent.par.Port.eval())
+        parent.FloraInParent.par.Version = version
+        parent.FloraInParent.par.Date = date
 
     def Start(self):
         # Stop the server if it's already running
